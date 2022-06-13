@@ -1,0 +1,112 @@
+.sidebar{
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 5rem);
+    background: var(--clr-gray);
+    z-index: 4;
+    display: grid;
+    align-items: center;
+    /* justify-content: center; */
+    transition: var(--transition);
+    transform: translate(-100%);
+}
+.sidebarInfo {
+    display: flex;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+    column-gap: 0.75rem;
+}
+.profileIcon {
+    font-size: 3rem;
+}
+.sidebarInfo p{
+    margin-bottom: 0;
+    font-size: 1.25rem;
+}
+.sidebar-links {
+    text-align: center;
+    margin: 4rem 0;
+}
+.sidebar-btn{
+    font-size: 2rem;
+    text-transform: capitalize;
+    transition: var(--transition);
+    color: var(--clr-font-dark);
+    letter-spacing: var(--spacing);
+    display: inline-block;
+    /* margin-bottom: 1.5rem; */
+    background: transparent;
+    border: transparent;
+    box-shadow: none;
+    font-weight: 300;
+}
+.sidebar-btn:hover {
+    color: var(--clr-pri-dark);
+    background: transparent;
+}
+.social-icons {
+    display: grid;
+    margin: 0 auto;
+    margin-top: 3rem;
+    place-items: center;
+    width: 20rem;
+    grid-template-columns: repeat(5,1fr);
+}
+.social-icons a{
+    font-size: 2rem;
+    color: var(--clr-font-dark);
+    transition: var(--transition);
+}
+.social-icons a:hover {
+    color: var(--clr-pri-dark);
+}
+.close-btn{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    background: transparent;
+    border: transparent;
+    transition: var(--transition);
+    color: #bb2525;
+    cursor: pointer;
+}
+.close-btn:hover {
+    color: #e66b6b;
+}
+
+@media screen and (min-width:400px) {
+    .sidebarInfo{
+        margin-bottom: 1.5rem;
+        column-gap: 1.5rem;
+    }
+    .sidebarInfo p{
+        font-size: 1.5rem;
+    }
+}
+@media screen and (min-width:768px) {
+    .sidebar{
+        width: 40%;
+        transform: translate(0);
+    }
+    .sidebarInfo p {
+        font-size: 1.25rem;
+    }
+    .close-btn{
+        display: none;        
+    }
+    .sidebar-setting{
+        width: 40%;
+    }
+}
+@media screen and (min-width:1250px) {
+    .sidebar {
+        width: 25%;
+    }
+        .sidebar-setting {
+            width: 25%;
+        }
+}
