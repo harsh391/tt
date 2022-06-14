@@ -1,12 +1,51 @@
-import { createContext,  useState } from "react";
+import { createContext,  useState, useEffect } from "react";
+import axios from 'axios'
 
 export const GlobalState = createContext()
 
 export const DataProvider = ({children}) => {
+    const [token,setToken] = useState('')
+    const [isLogged,setIsLogged] = useState(false)
+    
+    useEffect(() => {
+        const firstLogin = localStorage.getItem('firstLogin')
+
+        if(firstLogin)
+        {
+            const refreshtoken = async () => {
+                const res = await axios.get('/user/refresh_token')
+                setToken(res.data.accesstoken)
+                console.log('hello');
+                setTimeout(()=>{refreshtoken()},10 * 60 * 1000)
+            }
+            refreshtoken()            
+        }
+    },[])
+
+    useEffect(() => {
+        if(token) {
+            const getUser = async () => {
+                try {
+                    const res = await axios.get('/user/info',
+                    {
+                        headers: {Authorization: token}
+                    })
+                    setIsLogged(true)
+                } catch (err) {
+                    alert(err.response.data.msg)
+                }
+            }
+            getUser()
+        }
+
+    },[token])
+
+    
     const [isSidebar,setIsSidebar] = useState(false)
     const [option,setOption] = useState('')
     const [subject,setSubject] = useState('English')
-    
+
+
     const openSidebar = () => {
         setIsSidebar(true)
     }
@@ -19,7 +58,9 @@ export const DataProvider = ({children}) => {
         openSidebar,
         closeSidebar,
         option : [option,setOption],
-        subject: [subject,setSubject]
+        subject: [subject,setSubject],
+        token: [token],
+        isLogged: [isLogged, setIsLogged]
     }
 
     return (

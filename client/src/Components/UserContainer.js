@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'
+
+import React, { useContext} from 'react'
 import { GlobalState } from '../GlobalState'
 import Test from './Test'
 import './UserContainer.css'
@@ -7,6 +8,7 @@ const UserContainer = () => {
   const state = useContext(GlobalState)
   const [option] = state.option
   const [subject] = state.subject
+
   return (
     <>
         <div className='userContainer' style={{flex:'1'}}>

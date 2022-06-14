@@ -1,16 +1,37 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./Sidebar.css"
 import {FaTimes} from 'react-icons/fa'
 import {BsFacebook, BsInstagram, BsLinkedin, BsTwitter, BsYoutube} from 'react-icons/bs'
 import {CgProfile} from 'react-icons/cg'
 import { Link } from 'react-router-dom'
 import { GlobalState } from '../GlobalState'
+import axios from 'axios'
 
 const Sidebar = () => {
   const state = useContext(GlobalState)
+  const [user,setUser] = useState({})
   const [isSidebar] = state.isSidebar
   const [option,setOption] = state.option
   const closeSidebar = state.closeSidebar
+  const [token] = state.token
+
+  useEffect(() => {
+    if(token)
+    {
+        const getUser = async() => {
+            try{
+                const res = await axios.get('/user/info',
+                {headers:{Authorization:token}}
+                )
+                setUser(res.data)
+            } catch (err) {
+                alert(err.response.data.msg)
+            }
+        }
+        getUser()
+    }   
+  },[token])
+  
   const handleClick = (e) => {
     e.preventDefault()
     closeSidebar()
@@ -31,12 +52,12 @@ const Sidebar = () => {
             <div className="sidebarInfo">
                 <CgProfile className='profileIcon'/>
                 <div>
-                    <p>Harsh Solanki</p>
-                    <p>English Medium</p>
+                    <p>{user.name}</p>
+                    <p>{user.medium} medium</p>
                 </div>
                 <div>
-                    <p>GSEB</p>
-                    <p>7th Grade</p>
+                    <p>{user.board}</p>
+                    <p>{user.std}th grade</p>
                 </div>
             </div>
             {/* links */}
