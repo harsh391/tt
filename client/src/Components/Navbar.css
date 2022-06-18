@@ -36,11 +36,6 @@
     padding: 0.25rem;
     font-size: 1rem;
 }
-@media screen and (min-width: 768px) {
-    .nav-btn {
-        display: none;
-    }    
-}
 .navbar-fixed{
     position: fixed;
     top: 0;
@@ -49,4 +44,17 @@
     width: 100%;
     box-shadow: var(--dark-shadow);
     z-index: 2;
+}
+@media screen and (min-width: 768px) {
+    .nav-btn {
+        display: none;
+    }   
+    .navbar-fixed {
+        left: 40%;
+    } 
+}
+@media screen and (min-width: 1250px) {
+    .navbar-fixed {
+        left: 25%;
+    }
 }

@@ -1,14 +1,128 @@
-.sidebar{
+.sidebar {
+    height: 100vh;
+    width: 100%;
+    background-color: var(--clr-pri-medium);
     position: fixed;
-    top: 5rem;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: var(--transition);
+}
+
+.close_btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: none;
+    font-size: 1.2rem;
+    background: transparent;
+    cursor: pointer;
+}
+
+.profile_container {
+    background-color: var(--clr-pri-dark);
+    display: flex;
+    flex-direction: column;
+
+}
+
+.profile_img_container {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    margin: 10px;
+}
+
+.profile_img {
+    font-size: 4rem;
+    margin-right: 5px;
+}
+
+.profile_h3 {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.profile_info {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.option_container {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.sidebar_option {
+    font-size: 1.5rem;
+    margin: 5px;
+    list-style: none;
+    font-weight: 400;
+    transition: all 0.15s linear;
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+.sidebar_option:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.links_container {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    justify-content: space-around;
+}
+
+.sidebar_link {
+    font-size: 1.5rem;
+    margin: 5px;
+    transition: all 0.15s linear;
+}
+
+@media screen and (min-width: 768px) {
+    .sidebar {
+        width: 40%;
+        transform: translateX(0);
+    }
+
+    .close_btn {
+        display: none;
+    }
+        .sidebar-setting {
+            width: 40%;
+        }
+}
+
+@media screen and (min-width: 1250px) {
+    .sidebar {
+        width: 25%;
+    }
+        .sidebar-setting {
+            width: 25%;
+        }
+}
+
+/* .sidebar{
+    position: fixed;
+    top: 0;
     left: 0;
     width: 100%;
-    height: calc(100% - 5rem);
+    height: 100%;
     background: var(--clr-gray);
     z-index: 4;
     display: grid;
     align-items: center;
-    /* justify-content: center; */
     transition: var(--transition);
     transform: translate(-100%);
 }
@@ -37,7 +151,6 @@
     color: var(--clr-font-dark);
     letter-spacing: var(--spacing);
     display: inline-block;
-    /* margin-bottom: 1.5rem; */
     background: transparent;
     border: transparent;
     box-shadow: none;
@@ -109,4 +222,4 @@
         .sidebar-setting {
             width: 25%;
         }
-}
+} */

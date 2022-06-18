@@ -1,6 +1,7 @@
 
 import React, { useContext} from 'react'
 import { GlobalState } from '../GlobalState'
+import Marks from './Marks'
 import Test from './Test'
 import './UserContainer.css'
 
@@ -17,7 +18,7 @@ const UserContainer = () => {
           </div>
           {option==='Syllabus' ? 'syllabus' :
           option==='Schedule' ? 'schedule' : 
-          option==='Fees' ? 'fees' : <Test />  }
+          option==='Fees' ? 'fees' : <Marks />  }
         </div>
     </>
   )

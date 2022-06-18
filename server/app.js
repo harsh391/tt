@@ -5,6 +5,8 @@ const cors = require('cors')
 const connectDB = require('./db/connect')
 const cookieParser = require('cookie-parser')
 const userRoutes = require('./routes/userRoutes')
+const testRoutes = require('./routes/testRoutes')
+const markRoutes = require('./routes/marksRoutes')
 
 const app = express()
 app.use(express.json())
@@ -15,6 +17,8 @@ app.use(cookieParser())
 
 //routes
 app.use('/user',userRoutes)
+app.use('/api',testRoutes)
+app.use('/api',markRoutes)
 
 // Connect to mongodb
 const PORT = process.env.PORT || 5000

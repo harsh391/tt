@@ -1,0 +1,55 @@
+.marks {
+    margin: 0 1rem;
+    /* margin-top: 1rem; */
+}
+
+.marks-table {
+    border-collapse: collapse;
+    margin-top: 2px;
+    width: 100%;
+    outline: 2px black solid;
+}
+
+.marks-table>tr>td,
+.marks-table>tr>th {
+    padding: 0.5rem;
+    /* width: 25%; */
+}
+
+.marks-table tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+.marks-table tr:hover {
+    background-color: #ddd;
+}
+
+.marks-table>tr>th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background: #04AA6D;
+    color: #fff;
+}
+.obt-marks {
+    font-size: 1rem;
+    padding: 0.25rem;
+    width: 35%;
+    border-radius: 2px;
+    border: black solid 1px;
+    background: rgb(236, 229, 229);
+}
+.add-btn {
+    font-size: 1.25rem;
+    margin:  0 1.5rem;
+    cursor: pointer;
+}
+.add-btn:hover {
+    color: #04AA6D;
+}
+.marks-td {
+    width: 35%;
+    vertical-align: middle;
+    /* display: flex; */
+    
+}
