@@ -1,12 +1,13 @@
 const router = require('express').Router()
 
 
-const {getTests, createTest, deleteTest, editTest} = require('../controllers/testController')
+const {getTests, createTest, deleteTest, getTest, editTest} = require('../controllers/testController')
 
 // const auth = require('../middlewares/auth')
 
 router.route('/tests').get(getTests)
 router.route('/tests').post(createTest)
+router.route('/tests/:id').get(getTest)
 router.route('/tests/:id').delete(deleteTest)
 router.route('/tests/:id').put(editTest)
 // router.route('/register').post(register)

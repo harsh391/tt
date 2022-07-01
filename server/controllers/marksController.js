@@ -29,12 +29,13 @@ const getMarks = async(req,res) => {
 
 const editMarks = async(req,res) => {
     try {
+        const obtMarks = req.body.obtMarks
         await Marks.findOneAndUpdate(
             {_id:req.params.id},
-            {marks: req.body.marks}
+            {marks:obtMarks}
         )
 
-        res.status(201).json('Success.')
+        res.status(201).json({msg:'Success.'})
         
     } catch (err) {
         res.status(500).json({msg:err.message})      

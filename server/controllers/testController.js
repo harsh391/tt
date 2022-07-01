@@ -1,15 +1,14 @@
 const Tests = require('../models/testModel')
 const Users = require('../models/userModel')
 const Marks = require('../models/marksModel')
-const { find } = require('../models/marksModel')
 
 const createTest = async(req,res) => {
     try {
-        const {sub,std,date,board,medium,totalMarks} = req.body
+        const {sub,std,date,board,medium,chap,totalMarks} = req.body
         //validation
 
         //Adding info to test db
-        const test = await Tests.create({date, std,sub, medium,board,totalMarks})
+        const test = await Tests.create({date, std,sub, medium,board,chap,totalMarks})
 
         // Add info to marks table
         let users = []
@@ -51,7 +50,18 @@ const getTests = async(req,res) => {
         const tests = await Tests.find()
 
 
-        res.status(201).json(tests)
+        res.status(201).json({tests})
+        
+    } catch (err) {
+        res.status(500).json({msg : err.message})
+    }
+}
+
+const getTest = async(req,res) => {
+    try {
+        const test = await Tests.findById(req.params.id)
+
+        res.status(201).json({test})
         
     } catch (err) {
         res.status(500).json({msg : err.message})
@@ -82,9 +92,9 @@ const deleteTest = async(req,res) => {
 
 const editTest = async(req,res) => {
     try {
-        const {sub,std,date,board,medium,totalMarks} = req.body
+        const {sub,std,date,board,medium,chap,totalMarks} = req.body
         
-        await Tests.findOneAndUpdate({_id:req.params.id},{sub,std,date,board,medium,totalMarks})
+        await Tests.findOneAndUpdate({_id:req.params.id},{sub,std,date,board,medium,chap,totalMarks})
         
         res.status(201).json({msg:'Success.'})
         
@@ -94,4 +104,4 @@ const editTest = async(req,res) => {
 }
 
 
-module.exports = {getTests, createTest,deleteTest, editTest}
+module.exports = {getTests, createTest,deleteTest, editTest, getTest}

@@ -30,6 +30,7 @@ const Navbar = () => {
           <div className="nav-subject">
             <label htmlFor="" className='navLabel'>Subject</label>
             <select value={subject} className='nav-select' onChange={handleChange}>
+              <option value="All">All</option>
               <option value="English">English</option>
               <option value="SS">SS</option>
               <option value="Maths">Maths</option>

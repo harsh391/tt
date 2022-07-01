@@ -15,7 +15,6 @@ export const DataProvider = ({children}) => {
             const refreshtoken = async () => {
                 const res = await axios.get('/user/refresh_token')
                 setToken(res.data.accesstoken)
-                console.log('hello');
                 setTimeout(()=>{refreshtoken()},10 * 60 * 1000)
             }
             refreshtoken()            
@@ -43,7 +42,8 @@ export const DataProvider = ({children}) => {
     
     const [isSidebar,setIsSidebar] = useState(false)
     const [option,setOption] = useState('')
-    const [subject,setSubject] = useState('English')
+    const [subject,setSubject] = useState('All')
+    const [isAdmin,setIsAdmin] = useState(false)
 
 
     const openSidebar = () => {
@@ -60,7 +60,8 @@ export const DataProvider = ({children}) => {
         option : [option,setOption],
         subject: [subject,setSubject],
         token: [token],
-        isLogged: [isLogged, setIsLogged]
+        isLogged: [isLogged, setIsLogged],
+        isAdmin: [isAdmin,setIsAdmin]
     }
 
     return (

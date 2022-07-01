@@ -8,6 +8,8 @@
     z-index: 100;
     transform: translateX(-100%);
     transition: var(--transition);
+    background: #fff;
+    border-right: 2px solid #737373;
 }
 
 .close_btn {
@@ -15,16 +17,19 @@
     top: 1rem;
     right: 1rem;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     background: transparent;
     cursor: pointer;
+    color: red;
 }
 
 .profile_container {
-    background-color: var(--clr-pri-dark);
+    background-color: #4CB96B;
     display: flex;
     flex-direction: column;
-
+    color: #fff;
+    font-weight: 400;
+    font-size: 1.5rem;
 }
 
 .profile_img_container {
@@ -37,6 +42,7 @@
 .profile_img {
     font-size: 4rem;
     margin-right: 5px;
+    color: var(--clr-pri-dark);
 }
 
 .profile_h3 {
@@ -52,42 +58,65 @@
     justify-content: space-around;
     padding: 5px;
     margin-bottom: 10px;
+    font-weight: 500;
 }
 
 .option_container {
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    padding-left: 30px;
-    padding-right: 30px;
+    /* margin-top: 2px; */
+    /* margin: 2rem 0; */
+    /* display: flex;
+    flex-direction: column; */
+    /* display: grid; */
+    
+    /* padding-left: 30px;
+    padding-right: 30px; */
+    /* height: 40vh; */
 }
 
 .sidebar_option {
     font-size: 1.5rem;
-    margin: 5px;
+    padding: 1rem 2rem;
     list-style: none;
     font-weight: 400;
-    transition: all 0.15s linear;
+    transition: var(--transition);
     cursor: pointer;
-    padding-left: 10px;
+    color: #737373;
+    /* margin: 2px 0; */
+    border: solid 2px #fff;
+}
+.sidebar_option_selected {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    list-style: none;
+    font-weight: 400;
+    transition: var(--transition);
+    cursor: pointer;
+    color: #737373;
+    background: #D7FCDB;
+    color: #000;
 }
 
 .sidebar_option:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #D7FCDB;
+    color: #000;
+    border: solid 2px #4CB96B;
+
 }
 
 .links_container {
     display: flex;
-    margin-top: 20px;
-    margin-left: 2rem;
-    margin-right: 2rem;
+    margin: 2rem auto;
     justify-content: space-around;
 }
 
-.sidebar_link {
-    font-size: 1.5rem;
-    margin: 5px;
-    transition: all 0.15s linear;
+.sidebar_link a{
+    font-size: 2rem;
+    transition: var(--transition);
+    color: var(--clr-pri-dark);
+}
+.sidebar_link a:hover{
+    color: #4CB96B;
 }
 
 @media screen and (min-width: 768px) {

@@ -9,7 +9,6 @@ import './UserScreen.css'
 const UserScreen = () => {
   const state = useContext(GlobalState)
   const [isLogged] = state.isLogged
-  console.log(isLogged);
   
 
   return (

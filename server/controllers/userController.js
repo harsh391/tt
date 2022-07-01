@@ -93,6 +93,15 @@ const getUserInfo = async (req,res) => {
     }
 }
 
+const logout = async (req,res) => {
+    try {
+        res.clearCookie('refreshtoken', {path: '/user/refresh_token'})
+        return res.json({msg: 'Logged Out'})
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+}
+
 const createAccessToken = (id) => {
     return jwt.sign(id, process.env.ACCESS_TOKEN_SECRET,{expiresIn: '1d'})
 }
@@ -101,4 +110,4 @@ const createRefreshToken = (id) => {
     return jwt.sign(id, process.env.REFRESH_TOKEN_SECRET,{expiresIn: '1d'})
 }
 
-module.exports = {register, login, getUserInfo, refreshToken}
+module.exports = {register, login, getUserInfo, refreshToken,logout}

@@ -21,6 +21,10 @@ const testSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    chap:{
+        type: String,
+        required: true,
+    },
     totalMarks: {
         type: String,
         reqduired: true,
