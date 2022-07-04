@@ -53,6 +53,8 @@ export const DataProvider = ({children}) => {
         setIsSidebar(false)
     }
 
+    
+
     const state = {
         isSidebar : [isSidebar,setIsSidebar],
         openSidebar,
@@ -61,7 +63,7 @@ export const DataProvider = ({children}) => {
         subject: [subject,setSubject],
         token: [token],
         isLogged: [isLogged, setIsLogged],
-        isAdmin: [isAdmin,setIsAdmin]
+        isAdmin: [isAdmin,setIsAdmin],
     }
 
     return (

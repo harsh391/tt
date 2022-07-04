@@ -94,3 +94,15 @@ input[type=text] {
     border: transparent;
     background: transparent;
 }
+.edit-tr {
+    color: #04AA6D;
+    border: solid 2px #04AA6D;
+}
+.test-table > tr > td > a{
+    color: #000;
+    cursor: pointer;
+}
+.test-table>tr>td>a:hover{
+    color: var(--clr-pri-dark);
+    text-decoration: underline;
+}

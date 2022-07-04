@@ -2,25 +2,34 @@
 import React, { useContext} from 'react'
 import { GlobalState } from '../GlobalState'
 import Marks from './Marks'
+import Register from './Register'
 import Test from './Test'
 import TestAdmin from './TestAdmin'
+import Syllabus from './Syllabus'
+import Schedule from './Schedule'
+import Fees from './Fees'
 import './UserContainer.css'
 
 const UserContainer = () => {
   const state = useContext(GlobalState)
-  const [option] = state.option
+  const [option,setOption] = state.option
   const [subject] = state.subject
   const [isAdmin] = state.isAdmin
 
   return (
     <>
+    
         <div className='userContainer' style={{flex:'1'}}>
           <div className="user-container-option">
-            <h4>{option || 'test'}</h4>
+            <h4>{option}</h4>
           </div>
-          {option==='Syllabus' ? 'syllabus' :
-          option==='Schedule' ? 'schedule' : 
-          option==='Fees' ? 'fees' : <Test />  }
+          {/* Admin */}
+          {isAdmin ? 
+          option==='Register' ? <Register /> : <TestAdmin /> 
+          : 
+          option==='Syllabus' ? <Syllabus /> :
+          option==='Schedule' ? <Schedule /> : 
+          option==='Fees' ? <Fees /> : <Test />  }
         </div>
     </>
   )

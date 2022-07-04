@@ -36,9 +36,8 @@ const Sidebar = () => {
     }   
   },[token])
 
-  user.name === 'admin' ? setIsAdmin(true) : setIsAdmin(false)
-
-
+  user.firstname === 'admin' ? setIsAdmin(true) : setIsAdmin(false)
+//   option==='' ? isAdmin && setOption('Test Admin') : setOption('Test')
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -77,19 +76,21 @@ const Sidebar = () => {
                 {/* Admin controlles */}
                 {isAdmin && 
                 <>
-                    <li className={option==='Test Admin' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
-                        Test Admin
+                    
+                    <li className={option==='' || option==='Test Admin' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
+                        <Link to='/admin/tests'>Test Admin</Link>
                     </li>
+                    
                     <li className={option==='Register' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
-                        Register
+                        <Link to='/admin/register'>Register</Link>
                     </li>
                 </>
                 }
                 {/* Admin controls */}
                 {/* User Controls */}
                 {!isAdmin && <>
-                    <li className={option==='Test' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
-                        Test
+                    <li className={option==='Test' || option==='' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
+                        <Link to='/user/tests'>Test</Link>
                     </li>
                     <li className={option==='syllabus' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         Syllabus

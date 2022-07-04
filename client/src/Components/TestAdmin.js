@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './TestAdmin.css'
 //import data from "./test-data"
 import { useState, useEffect } from 'react'
@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { BiEditAlt } from 'react-icons/bi'
 import { RiDeleteBin7Fill } from 'react-icons/ri'
 import axios from 'axios'
+import { GlobalState } from '../GlobalState'
 const TestAdmin = () => {
     const [tests, setTests] = useState([]);
     const [testDetails, setTestDetails] = useState({
@@ -15,13 +16,15 @@ const TestAdmin = () => {
 
     })
     const [add, setAdd] = useState(false);
+    const state = useContext(GlobalState)
+    const [option,setOption] = state.option
     const [isEditing, setIsEditing] = useState(false);
     const [id, setId] = useState("")
     useEffect(() => {
 
         const getTests = async () => {
             try {
-                const res = await axios.get('api/tests')
+                const res = await axios.get('/api/tests')
                 setTests(res.data.tests)
             } catch (err) {
                 alert(err.response.data.msg)
@@ -33,7 +36,7 @@ const TestAdmin = () => {
     const handleDelete = async (_id) => {
         //alert(testid
         try {
-            await axios.delete(`api/tests/${_id}`)
+            await axios.delete(`/api/tests/${_id}`)
             setAdd(!add);
         } catch (err) {
             alert(err.response.data.msg)
@@ -85,7 +88,6 @@ const TestAdmin = () => {
 
     return (
         <div className='test'>
-            {console.log(tests)}
 
             <div className="test-form">
                 <div className="single-detail">
@@ -152,10 +154,10 @@ const TestAdmin = () => {
 
                 </tr>
                 {tests.map((item) => {
-                    return <tr>
+                    return <tr key={item._id} className={(id===item._id && isEditing) ? 'edit-tr' : ''}>
 
-                        <td>
-                            <Link to='/SingleTest'>{item.date}</Link>
+                        <td >
+                            <Link to={`/admin/tests/${item._id}`}>{item.date}</Link>
                         </td>
                         <td>{item.std}</td>
                         <td>{item.sub}</td>

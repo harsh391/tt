@@ -28,7 +28,7 @@ const createTest = async(req,res) => {
                     const marks = await Marks.create({
                     testId:test._id,
                     userId:user._id,  
-                    userName:user.name,
+                    userName:user.firstname + ' ' + user.lastname,
                     marks:0              
                 })
             });
@@ -48,8 +48,6 @@ const createTest = async(req,res) => {
 const getTests = async(req,res) => {
     try {
         const tests = await Tests.find()
-
-
         res.status(201).json({tests})
         
     } catch (err) {

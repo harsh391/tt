@@ -16,7 +16,7 @@ const Login = () => {
             //Call server
             await axios.post('/user/login',{...user})
             localStorage.setItem('firstLogin',true);
-            window.location.href = './UserScreen'
+            user.email==='admin' && user.password==='admin123' ? window.location.href = './admin/tests' : window.location.href = './user/tests'
             
         } catch (err) {
             alert(err.response.data.msg)

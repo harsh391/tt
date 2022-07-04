@@ -1,13 +1,79 @@
-.registerContainer{
+.register_Container {
     display: grid;
     place-items: center;
-    max-width: 80%;
-    padding:0 2rem;
+    max-width: 90%;
+    padding: 0 2rem;
     margin: 2rem auto;
-    max-width: 400px;
-    border: 2px solid #0f158b;
+    /* border: 2px solid #0f158b; */
 }
-.registerContainer h1{
+
+.register_Form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 0.25rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.register_fromControl {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.register_label {
+    font-size: 1.1rem;
+    font-family: var(--ff-para);
+    margin-right: 10px;
+}
+
+.register_input {
+    width: 80% !important;
+    height: 30px;
+    text-align: left;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+.register_textarea {
+    width: 80% !important;
+    height: 80px;
+    text-align: left;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+.register_footer {
+    display: grid;
+    place-content: center;
+    place-items: center;
+}
+
+.register_footer .register_btn {
+    cursor: pointer;
+    display: block;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    background: #129856;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.register_btn:hover {
+    background: #76f4b5;
+    color: #129856;
+}
+
+.register_p {
+    margin-top: 0.5rem;
+    color: #111;
+}
+
+/* .registerContainer h1{
     text-align: center;
 }
 .registerFormRow{
@@ -42,4 +108,4 @@
 .registerLinkText a {
     color: darkblue;
     text-decoration: underline;
-}
+} */
