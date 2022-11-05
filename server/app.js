@@ -8,6 +8,7 @@ const userRoutes = require('./routes/userRoutes')
 const testRoutes = require('./routes/testRoutes')
 const markRoutes = require('./routes/marksRoutes')
 const feesRoutes = require('./routes/feesRoutes')
+const syllabusRoutes = require('./routes/syllabusRoutes')
 
 const app = express()
 app.use(express.json())
@@ -21,6 +22,7 @@ app.use('/user',userRoutes)
 app.use('/api',testRoutes)
 app.use('/api',markRoutes)
 app.use('/api',feesRoutes)
+app.use('/api',syllabusRoutes)
 
 // Connect to mongodb
 const PORT = process.env.PORT || 5000
