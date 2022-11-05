@@ -42,4 +42,18 @@ const editMarks = async(req,res) => {
     }
 }
 
-module.exports = {getMarks, editMarks}
+const getUserMarks = async(req,res) => {
+    try {
+        const id=res.user.id
+        const user = await Users.findById(id)
+        // const tests = await Tests.find({std:user.std},{medium:user.medium},{board:user.boards})
+        const marks = await Marks.find({userId:id})
+
+        res.status(201).json({marks})
+        
+    } catch (err) {
+        res.status(500).json({msg:err.message})      
+    }
+}
+
+module.exports = {getMarks, editMarks,getUserMarks}

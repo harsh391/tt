@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser')
 const userRoutes = require('./routes/userRoutes')
 const testRoutes = require('./routes/testRoutes')
 const markRoutes = require('./routes/marksRoutes')
+const feesRoutes = require('./routes/feesRoutes')
 
 const app = express()
 app.use(express.json())
@@ -19,6 +20,7 @@ app.use(cookieParser())
 app.use('/user',userRoutes)
 app.use('/api',testRoutes)
 app.use('/api',markRoutes)
+app.use('/api',feesRoutes)
 
 // Connect to mongodb
 const PORT = process.env.PORT || 5000
