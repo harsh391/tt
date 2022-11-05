@@ -44,7 +44,7 @@
 .test-table>tr>th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: center;
+    text-align: center!important;
     background: #04AA6D;
     color: #fff;
 }

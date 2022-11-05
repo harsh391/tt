@@ -20,7 +20,7 @@
 .test-table > tr> th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: left;
+    text-align: center;
     background: #04AA6D;
     color: #fff;
 }

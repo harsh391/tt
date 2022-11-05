@@ -1,3 +1,15 @@
+.syllabus-dropdown {
+    /* border-top: 5px solid #000; */
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
 .syllabus-select {
     margin-right: 2rem;
+}
+.checkbox-css {
+    height:50%
+}
+.syllabusAdmin {
+    box-shadow: 10px 5px 5px gray;
 }

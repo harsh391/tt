@@ -1,4 +1,7 @@
-import React, { useContext, useState } from 'react'
+import axios from 'axios'
+import React, { useContext, useEffect, useState } from 'react'
+import { BiEditAlt } from 'react-icons/bi'
+import { RiDeleteBin7Fill } from 'react-icons/ri'
 import { GlobalState } from '../GlobalState'
 import './SyllabusAdmin.css'
 
@@ -6,55 +9,94 @@ const SyllabusAdmin = () => {
   const state = useContext(GlobalState)
   const [token] = state.token
   const [item,setItem] = useState({
-    sub:'',std:0,chapNo:'',chapName:'',chapStatus:false
+    sub:'',std:'',chapNo:'',chapName:'',chapStatus:''
   })
+  const [sylls, setSylls] = useState([]);
   const [isEditing,setIsEditing] = useState(false)
-  const [subject,setSubject] = useState('')
-  const [standard,setStandard] = useState('')
+  const [subject,setSubject] = useState('English')
+  const [standard,setStandard] = useState('10')
+  const [add,setAdd] = useState(false)
+  const [id,setId] = useState('')
+  let index=1
+
+  useEffect(() => {
+    const getChapters = async (subject,standard) => {
+      try {
+        const res = await axios.get(`/api/syllabus/${standard}/${subject}`)
+        setSylls(res.data)
+        
+      } catch (err) {
+        alert(err.response.data.msg)
+        
+      }
+    }
+    getChapters(subject,standard)
+
+  },[standard,subject,add])
 
   const handleChange = (e) => {
-    setItem(e.target.value)
+    const {name,value} = e.target
+    setItem({...item,[name]:value})
   }
 
-  const handleCheckbox = (e) => {
-        const {name,value} = e.target;
-        let val = true
-        if(value==='true') val=false
-        setItem({...item, [name] : val})
+    const handleSub = (e) => {
+      setSubject(e.target.value)
+    }
+    const handleStd = (e) => {
+      setStandard(e.target.value)
     }
 
   const handleCreate = async (e) => {
         if (isEditing) {
             setIsEditing(false)
             try {
-                // const res = await axios.put(`/api/tests/${id}`, testDetails)
-                // setAdd(!add)
+                const res = await axios.put(`/api/syllabus/${id}`, item)
+                setAdd(!add)
             } catch (err) {
                 alert(err.response.data.msg)
             }
         }
         else {
             try {
-                // const res = await axios.post('/api/tests', testDetails)
-                // setAdd(!add)
+                const res = await axios.post('/api/syllabus', item)
+                setAdd(!add)
             } catch (err) {
                 alert(err.response.data.msg)
             }
         }
         setItem({
-            sub:'',std:0,chapNo:'',chapName:'',chapStatus:false
+            sub:'',std:'',chapNo:'',chapName:'',chapStatus:''
         })
 
     }
 
+    const handleDelete = async (_id) => {
+        try {
+            await axios.delete(`/api/syllabus/${_id}`)
+            setAdd(!add);
+        } catch (err) {
+            alert(err.response.data.msg)
+        }
+    }
+
+    const handleEdit = (syll) => {
+        setIsEditing(true);
+        setId(syll._id)
+        const { std,sub,chapNo,chapName,chapStatus } = syll;
+
+        setItem({
+            std: std, sub: sub, chapNo:chapNo,chapName:chapName,chapStatus:chapStatus
+        })
+    }
+
   return (
     <>
-    <div className='test'>
+    <div className='test syllabusAdmin'>
       <div className="test-form">
         <div className="single-detail">
             <label >Subject</label>
 
-            <input type="text" name="sub" required="required" placeholder='enter Subject' value={item.sub} onChange={handleChange} />
+            <input type="text" name="sub" required="required" placeholder='enter subject' value={item.sub} onChange={handleChange} />
 
         </div>
         <div className="single-detail">
@@ -66,19 +108,18 @@ const SyllabusAdmin = () => {
         <div className="single-detail">
             <label >Chapter No.</label>
 
-            <input type="text" name="chapNo" required="required" placeholder='enter subject' value={item.chapNo} onChange={handleChange} />
+            <input type="text" name="chapNo" required="required" placeholder='enter chapter number' value={item.chapNo} onChange={handleChange} />
         </div>
         <div className="single-detail">
             <label >Chapter Name</label>
 
-            <input type="text" name="chapName" required="required" placeholder='enter board' value={item.chapName} onChange={handleChange} />
+            <input type="text" name="chapName" required="required" placeholder='enter chap name' value={item.chapName} onChange={handleChange} />
 
         </div>
         <div className="single-detail">
             <label >Chapter Status</label>
-            {/* chceckbox */}
 
-            <input type="checkbox" className='checkbox-css' name="instThreeStatus" value={item.chapStatus} onChange={handleCheckbox} />
+            <input type='text' name="chapStatus" required="required" placeholder='enter chapter Status' value={item.chapStatus} onChange={handleChange} />
 
         </div>
         <div className="btn-container">
@@ -86,12 +127,14 @@ const SyllabusAdmin = () => {
                 {isEditing ? 'EDIT' : 'Create'}
             </button>
         </div>
+
       </div>
+    </div>
 
       {/* <div className="syllabus-dropdown"> */}
-        <div className="subject-dropdown ">
+        <div className="syllabus-dropdown">
           <label htmlFor="" className='syllabus-label'>Subject :</label>
-            <select value={subject} className='syllabus-select' onChange={handleChange}>
+            <select value={subject} className='syllabus-select' onChange={handleSub}>
               <option value="English">English</option>
               <option value="SS">SS</option>
               <option value="Maths">Maths</option>
@@ -99,7 +142,7 @@ const SyllabusAdmin = () => {
             </select>
 
           <label htmlFor="" className='syllabus-label'>Standard :</label>
-            <select value={standard} className='syllabus-select' onChange={handleChange}>
+            <select value={standard} className='syllabus-select' onChange={handleStd}>
               <option value="7">7</option>
               <option value="8">8</option>
               <option value="9">9</option>
@@ -109,28 +152,38 @@ const SyllabusAdmin = () => {
             </select>
 
         </div>
-      </div>     
 
-      <table className="fees-table">
+      <div className="test">'
+        <table className="test-table">
 
-        <tr>
-          <th>Sr. No.</th>
-          <th>Chapter No.</th>
-          <th>Chapter Name</th>
-          <th>Status</th>
+          <tr key={item._id} className={(id===item._id && isEditing) ? 'edit-tr' : ''}>
+            <th>Sr. No.</th>
+            <th>Chapter No.</th>
+            <th>Chapter Name</th>
+            <th>Status</th>
+            <th>Actions</th>
 
-        </tr>
-
-      {/* {items.map((item) => {
-          return <tr key={index}>
-            <td>{index++}</td>
-            <td>{item.chapNo}</td>
-            <td>{item.chapName}</td>
-            <td>{item.chapStatus}</td>
           </tr>
-      })} */}
 
-      </table>
+        {sylls.map((syll) => {
+            return (
+            <tr key={index}>
+              <td>{index++}</td>
+              <td>{syll.chapNo}</td>
+              <td>{syll.chapName}</td>
+              <td>{syll.chapStatus}</td>
+              <td>
+                <button className='edit-btn-dif' onClick={() => handleDelete(syll._id)}> <RiDeleteBin7Fill className='add-btn' /></button>
+
+                <button className='edit-btn-dif' onClick={() => handleEdit(syll)}> <BiEditAlt className='add-btn' />
+                </button>
+              </td>
+            </tr> 
+            )
+        })}
+
+        </table>
+      </div>
 
     </>
   )

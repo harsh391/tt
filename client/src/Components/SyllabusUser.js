@@ -29,7 +29,7 @@ const SyllabusUser = () => {
     
   //     const getItems = async (subject) => {
   //       try {
-          // const res = await axios.get(`/api/syllabus?std=${std}&${subject}`)
+          // const res = await axios.get(`/api/syllabus/${std}/${subject}`)
   //         setItems(res.data.items)
           
   //       } catch (err) {

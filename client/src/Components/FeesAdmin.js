@@ -5,6 +5,7 @@ import axios from 'axios'
 
 const FeesAdmin = () => {
   const [students,setStudents] = useState([])
+  let index=1
   useEffect(() => {
 
     const getStudents = async() => {
@@ -25,6 +26,7 @@ const FeesAdmin = () => {
     <table className="fees-table">
 
       <tr>
+        <th>Sr No.</th>
         <th>Name</th>
         <th>Standard</th>
 
@@ -33,6 +35,7 @@ const FeesAdmin = () => {
       {students.map((student) => {
         if(student.firstname !== 'admin' && student.lastname !== 'admin') {
           return <tr key={student._id}>
+            <td>{index++}</td>
             <td><Link to={`/admin/fees/${student._id}`}>{student.firstname + ' ' + student.lastname}</Link></td>
             <td>{student.std}</td>
           </tr>
