@@ -1,0 +1,23 @@
+.fees-edit-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr !important;
+}
+
+.fees-edit-form > .single-detail > input {
+    font-size: 1rem;
+    padding: 0.5rem;
+    width: 50%;
+}
+
+.fees-edit-form>.single-detail>.checkbox-css {
+    height: 50%;
+}
+
+.fees-edit-btn {
+    color: black;
+}
+
+.fees-table {
+    margin-bottom: 2rem;
+}
+

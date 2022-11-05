@@ -27,7 +27,7 @@ const Navbar = () => {
         <div className="nav-header">
           {/* <h4>Thakar Tutorials</h4> */}
           <h4>TT</h4>
-          <div className="nav-subject">
+          {/* <div className="nav-subject">
             <label htmlFor="" className='navLabel'>Subject</label>
             <select value={subject} className='nav-select' onChange={handleChange}>
               <option value="All">All</option>
@@ -36,7 +36,7 @@ const Navbar = () => {
               <option value="Maths">Maths</option>
               <option value="Science">Science</option>
             </select>
-          </div>
+          </div> */}
           <button className="nav-btn" onClick={handleClick}>
             <FaBars />
           </button>

@@ -5,10 +5,11 @@ import Marks from './Marks'
 import Register from './Register'
 import Test from './Test'
 import TestAdmin from './TestAdmin'
-import Syllabus from './Syllabus'
 import Schedule from './Schedule'
-import Fees from './Fees'
+import FeesUser from './FeesUser'
 import './UserContainer.css'
+import FeesAdmin from './FeesAdmin'
+import SyllabusUser from './SyllabusUser'
 
 const UserContainer = () => {
   const state = useContext(GlobalState)
@@ -27,9 +28,9 @@ const UserContainer = () => {
           {isAdmin ? 
           option==='Register' ? <Register /> : <TestAdmin /> 
           : 
-          option==='Syllabus' ? <Syllabus /> :
+          option==='Syllabus' ? <SyllabusUser /> :
           option==='Schedule' ? <Schedule /> : 
-          option==='Fees' ? <Fees /> : <Test />  }
+          option==='Fees' ? <FeesAdmin /> : <FeesUser />  }
         </div>
     </>
   )

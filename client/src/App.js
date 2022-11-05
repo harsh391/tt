@@ -7,7 +7,13 @@ import PageUserTest from './Pages/PageUserTest'
 import PageAdminRegister from './Pages/PageAdminRegister'
 import PageAdminMarks from './Pages/PageAdminMarks'
 import UserScreen from './Pages/UserScreen';
+import PageUserFees from './Pages/PageUserFees'
+import PageUserSyllabus from './Pages/PageUserSyllabus';
+import PageAdminSyllabus from './Pages/PageAdminSyllabus'
+import PageAdminFees from './Pages/PageAdminFees'
+
 import { DataProvider } from './GlobalState';
+import PageAdminFeesEdit from './Pages/PageAdminFeesEdit';
 
 
 function App() {
@@ -23,6 +29,11 @@ function App() {
           <Route path='/user/tests' element={<PageUserTest></PageUserTest>}></Route>
           <Route path='/admin/tests' element={<PageAdminTest></PageAdminTest>}></Route>
           <Route path='/admin/register' element={<PageAdminRegister></PageAdminRegister>}></Route>
+          <Route path='/user/fees' element={<PageUserFees></PageUserFees>}></Route>
+          <Route path='/admin/fees' element={<PageAdminFees></PageAdminFees>}></Route>
+          <Route path='/user/syllabus' element={<PageUserSyllabus></PageUserSyllabus>}></Route>
+          <Route path='/admin/syllabus' element={<PageAdminSyllabus></PageAdminSyllabus>}></Route>
+          <Route path='/admin/fees/:id' element={<PageAdminFeesEdit></PageAdminFeesEdit>}></Route>
           <Route path='/admin/tests/:id' element={<PageAdminMarks></PageAdminMarks>}></Route>
           </Routes>
         </Router>

@@ -1,7 +1,29 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react'
+import { GlobalState } from '../GlobalState';
 import './Test.css'
 
 const Test = () => {
+  const state = useContext(GlobalState)
+  const [token] = state.token
+  const [marks,setMarks] = useState([])
+  useEffect(() => { 
+    if(token)
+    {
+        const getTest = async() => {
+            try{
+                const res = await axios
+                .get('/test/info',
+                {headers:{Authorization:token}}
+                )
+                setMarks(res.data.marks)
+            } catch (err) {
+                alert(err.response.data.msg)
+            }
+        }
+        getTest()
+    }   
+  },[token])
   return (
     <div className='test'>
         <table className="test-table">
