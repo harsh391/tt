@@ -3,23 +3,49 @@ import React, { useContext, useEffect, useState } from 'react'
 import { GlobalState } from '../GlobalState'
 
 const FeesUser = () => {
-  const [tempFees,setTempFees] = useState({})
   const state = useContext(GlobalState)
   const [token] = state.token
+  const [id,setId] = useState('')
+  const [std,setStd] = useState('')
+  const [tempFees,setTempFees] = useState({})
+  const [tempInst,setTempInst] = useState({})
 
   useEffect(() => {
-      const getFees = async () => {
-          try {
-            const res = await axios.get(`/api/fees/${token}`)
-            setTempFees(res.data)
+
+    if(token) {
+      const getUser = async() => {
+          try{
+              const res = await axios.get('/user/info',
+              {headers:{Authorization:token}}
+              )
+              setId(res.data._id)
+              setStd(res.data.std)
           } catch (err) {
-            alert(err.response.data.msg)
+              alert(err.response.data.msg)
           }
       }
-
-      getFees()
-
+      getUser()
+    }  
   },[])
+
+  useEffect(() => {
+    const getFees = async () => {
+        try {
+            const res = await axios.get(`/api/fees/${std}/${id}`)
+            if(res.data.isCreate === true) {
+                alert('No records found')
+            }
+            else {
+                setTempFees(res.data.user)
+            }
+            setTempInst(res.data.inst)
+        } catch (err) {
+            alert(err.response.data.msg)
+        }
+    }
+    getFees()
+  },[std,id])
+
   return (
     <div>
       <table className="fees-table">
@@ -30,18 +56,18 @@ const FeesUser = () => {
         </tr>
         <tr>
             <td>1</td>
-            <td>{tempFees.instOneAmount}</td>
-            <td>{tempFees.instOneStatus === true ? 'Paid' : 'Unpaid'}</td>
+            <td>{tempInst.instOne}</td>
+            <td>{tempFees.instOneStatus}</td>
         </tr>
         <tr>
             <td>2</td>
-            <td>{tempFees.instTwoAmount}</td>
-            <td>{tempFees.instTwoStatus === true ? 'Paid' : 'Unpaid'}</td>
+            <td>{tempInst.instTwo}</td>
+            <td>{tempFees.instTwoStatus}</td>
         </tr>
         <tr>
             <td>3</td>
-            <td>{tempFees.instThreeAmount}</td>
-            <td>{tempFees.instThreeStatus === true ? 'Paid' : 'Unpaid'}</td>
+            <td>{tempInst.instThree}</td>
+            <td>{tempFees.instThreeStatus}</td>
         </tr>
       </table>
     </div>

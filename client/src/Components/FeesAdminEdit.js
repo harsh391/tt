@@ -7,27 +7,29 @@ const FeesAdminEdit = () => {
     const [name,setName] = useState('')
     const [add, setAdd] = useState(false);
     const [edit,setEdit] = useState(false)
-    const userIdentity = useParams()
+    const userIdentity = useParams().id
+    const std = useParams().std
 
     const [fees,setFees] = useState({
         userId:userIdentity.id,
-        instOneAmount:0,instTwoAmount:0,instThreeAmount:0,
-        instOneStatus:false,instTwoStatus:false,instThreeStatus:false
+        instOneStatus:'',instTwoStatus:'',instThreeStatus:''
     })
 
     const [tempFees,setTempFees] = useState({})
+    const [tempInst,setTempInst] = useState({})
 
     useEffect(() => {
         const getFees = async () => {
             try {
-                const res = await axios.get(`/api/fees/${userIdentity.id}`)
-                setTempFees(res.data)
+                const res = await axios.get(`/api/fees/${std}/${userIdentity.id}`)
+                console.log(res.data);
                 if(res.data.isCreate === true) {
-                    setEdit(false)
+                    alert('Please Add status')
                 }
                 else {
-                    setEdit(true)
+                    setTempFees(res.data.user)
                 }
+                setTempInst(res.data.inst)
             } catch (err) {
                 alert(err.response.data.msg)
             }
@@ -52,11 +54,9 @@ const FeesAdminEdit = () => {
         setFees({ ...fees, [name]: value })
     }
 
-    const handleCheckbox = (e) => {
-        const {name, value} = e.target;
-        let val = true
-        if(value==='true') val=false
-        setFees({...fees, [name] : val})
+    const handleEdit = () => {
+        setEdit(true)
+        setFees(tempFees)
     }
 
     const handleClick = async (e) => {
@@ -65,7 +65,8 @@ const FeesAdminEdit = () => {
             try {
                 const res = await axios.put('/api/fees', fees)
                 setAdd(!add)
-                setEdit(true)
+                setEdit(false)
+                setFees({userId:userIdentity.id,instOneStatus:'',instTwoStatus:'',instThreeStatus:''})
             } catch (err) {
                 alert(err.response.data.msg)
             }
@@ -74,13 +75,11 @@ const FeesAdminEdit = () => {
             try {
                 const res = await axios.post('/api/fees', fees)
                 setAdd(!add)
-                setEdit(false)
+                setFees({userId:userIdentity.id,instOneStatus:'',instTwoStatus:'',instThreeStatus:''})
             } catch (err) {
                 alert(err.response.data.msg)
             }
         }
-
-        console.log(fees)
     }
 
 
@@ -88,48 +87,30 @@ const FeesAdminEdit = () => {
   return (
     <div className="feesAdminEdit">
 
-        <div className="test-form fees-edit-form">
-                <div className="single-detail">
-                    <label >Installment 1 Amount : </label>
-
-                    <input type="number" name="instOneAmount" required="required" placeholder='Enter Amount' value={fees.instOneAmount} onChange={handleChange} />
-
-                </div>
-
+        <div className="test-form">
                 <div className="single-detail">
                     <label >Installment 1 Status : </label>
 
-                    <input type="checkbox" className='checkbox-css' name="instOneStatus" value={fees.instOneStatus} onChange={handleCheckbox} />
+                    <input type="text" name="instOneStatus" required="required" placeholder='Paid/Unpaid' value={fees.instOneStatus} onChange={handleChange} />
+
 
                 </div>
-
-                <div className="single-detail">
-                    <label >Installment 2 Amount : </label>
-
-                    <input type="number" name="instTwoAmount" required="required" placeholder='Enter Amount' value={fees.instTwoAmount} onChange={handleChange} />
-
-                </div>
-
                 <div className="single-detail">
                     <label >Installment 2 Status : </label>
 
-                    <input type="checkbox" name="instTwoStatus"  className='checkbox-css' value={fees.instTwoStatus} onChange={handleCheckbox} />
+                    <input type="text" name="instTwoStatus" required="required" placeholder='Paid/Unpaid' value={fees.instTwoStatus} onChange={handleChange} />
 
                 </div>
-
-                <div className="single-detail">
-                    <label >Installment 3 Amount : </label>
-
-                    <input type="number" name="instThreeAmount" required="required" placeholder='Enter Amount' value={fees.instThreeAmount} onChange={handleChange} />
-
-                </div>
-
                 <div className="single-detail">
                     <label >Installment 3 Status : </label>
 
-                    <input type="checkbox" className='checkbox-css' name="instThreeStatus" value={fees.instThreeStatus} onChange={handleCheckbox} />
+                    <input type="text" name="instThreeStatus" required="required" placeholder='Paid/Unpaid' value={fees.instThreeStatus} onChange={handleChange} />
 
                 </div>
+            </div>
+
+            <div className="btn-container save-btn">
+                <button className='btn create-btn' onClick={handleClick}>Save</button>
             </div>
 
              <table className="fees-table">
@@ -140,24 +121,24 @@ const FeesAdminEdit = () => {
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td>{tempFees.instOneAmount}</td>
-                    <td>{tempFees.instOneStatus === true ? 'Paid' : 'Unpaid'}</td>
+                    <td>{tempInst.instOne}</td>
+                    <td>{tempFees.instOneStatus}</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>{tempFees.instTwoAmount}</td>
-                    <td>{tempFees.instTwoStatus === true ? 'Paid' : 'Unpaid'}</td>
+                    <td>{tempInst.instTwo}</td>
+                    <td>{tempFees.instTwoStatus}</td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>{tempFees.instThreeAmount}</td>
-                    <td>{tempFees.instThreeStatus === true ? 'Paid' : 'Unpaid'}</td>
+                    <td>{tempInst.instThree}</td>
+                    <td>{tempFees.instThreeStatus}</td>
                 </tr>
             </table>
 
 
             <div className="btn-container">
-                <button className='btn create-btn' onClick={handleClick}>{edit ? 'Edit' : 'create'}</button>
+                <button className='btn create-btn' onClick={handleEdit}>Edit</button>
             </div>
     </div>
   )

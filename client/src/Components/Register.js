@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const Register = () => {
   const [user,setUser] = useState({
-    firstname:'',lastname:'',email:'',std:'',medium:'',board:'',sub:[],school:'',gender:'',dob:'',add:'',contact1:'',contact2:'',password:'',
+    firstname:'',lastname:'',email:'',std:'',school:'',gender:'',dob:'',add:'',contact1:'',contact2:'',
   })
   
 
@@ -14,15 +14,18 @@ const Register = () => {
     const {name,value} = e.target;
     setUser({...user,[name]:value})
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     //password generate
-    const randomPassword = Math.random().toString(36).slice(2)
-    console.log(randomPassword);
-    setUser({...user,password:randomPassword})   
+    // const password = Math.random().toString(36).slice(2)
 
     try {
       await axios.post('/user/register',{...user})
+      alert("Registeration Successful")
+      setUser({
+        firstname:'',lastname:'',email:'',std:'',school:'',gender:'',dob:'',add:'',contact1:'',contact2:'',
+      })
     } catch (err) {
       alert(err.response.data.msg)
     }
@@ -52,14 +55,6 @@ const Register = () => {
             <input type="text" className='register_input' name='std' value={user.std} onChange={handleChange} />
           </div>
 
-          <div className='register_fromControl'>
-            <label htmlFor="medium" className='register_label'>Medium</label>
-            <input type="text" className='register_input' name='medium' value={user.medium} onChange={handleChange} />
-          </div>
-          <div className='register_fromControl'>
-            <label htmlFor="board" className='register_label'>Board</label>
-            <input type="text" className='register_input' name='board' value={user.board} onChange={handleChange} />
-          </div>
           <div className='register_fromControl'>
             <label htmlFor="school" className='register_label'>School</label>
             <input type="text" className='register_input' name='school' value={user.school} onChange={handleChange} />

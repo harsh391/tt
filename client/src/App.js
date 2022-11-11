@@ -33,7 +33,7 @@ function App() {
           <Route path='/admin/fees' element={<PageAdminFees></PageAdminFees>}></Route>
           <Route path='/user/syllabus' element={<PageUserSyllabus></PageUserSyllabus>}></Route>
           <Route path='/admin/syllabus' element={<PageAdminSyllabus></PageAdminSyllabus>}></Route>
-          <Route path='/admin/fees/:id' element={<PageAdminFeesEdit></PageAdminFeesEdit>}></Route>
+          <Route path='/admin/fees/:std/:id' element={<PageAdminFeesEdit></PageAdminFeesEdit>}></Route>
           <Route path='/admin/tests/:id' element={<PageAdminMarks></PageAdminMarks>}></Route>
           </Routes>
         </Router>

@@ -67,8 +67,6 @@ const Sidebar = () => {
                     <h3 className='profile_h3'>{`${user.firstname} ${user.lastname}`}</h3>
                 </div>
                 <div className='profile_info'>
-                    <span className='profile_medium'>Medium: {user.medium}</span>
-                    <span className='profile_board'>Board: {user.board}</span>
                     <span className='profile_std'>Std : {user.std}</span>
                 </div>
             </div>

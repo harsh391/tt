@@ -5,7 +5,11 @@ import axios from 'axios'
 
 const FeesAdmin = () => {
   const [students,setStudents] = useState([])
+  const [standard,setStandard] = useState('7')
   let index=1
+  const handleStd = (e) => {
+      setStandard(e.target.value)
+    }
   useEffect(() => {
 
     const getStudents = async() => {
@@ -22,6 +26,19 @@ const FeesAdmin = () => {
   },[])
 
   return (
+    <>
+
+    <div className="syllabus-dropdown">
+      <label htmlFor="" className='syllabus-label'>Standard :</label>
+        <select value={standard} className='syllabus-select' onChange={handleStd}>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
+    </div>
     
     <table className="fees-table">
 
@@ -36,13 +53,15 @@ const FeesAdmin = () => {
         if(student.firstname !== 'admin' && student.lastname !== 'admin') {
           return <tr key={student._id}>
             <td>{index++}</td>
-            <td><Link to={`/admin/fees/${student._id}`}>{student.firstname + ' ' + student.lastname}</Link></td>
+            <td><Link to={`/admin/fees/${student.std}/${student._id}`}>{student.firstname + ' ' + student.lastname}</Link></td>
             <td>{student.std}</td>
           </tr>
         }
       })}
 
     </table>
+
+    </>
   )
 }
 
