@@ -8,7 +8,7 @@ const {createFees, getFees, updateFees} = require('../controllers/feesContoller'
 
 router.route('/getUsers').get(getUsers)
 router.route('/fees').put(updateFees)
-router.route('/fees/:id').get(getFees)
+router.route('/fees/:std/:id').get(getFees)
 router.route('/fees').post(createFees)
 // router.route('/fees/:id').put(editFees)
 

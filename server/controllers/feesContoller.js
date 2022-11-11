@@ -1,14 +1,15 @@
 const Fees = require('../models/feesModel')
+const Inst = require('../models/instModel')
 // const Users = require('../models/userModel')
 
 const createFees = async (req,res) => {
     try {
-        const {userId,instOneAmount,instTwoAmount,instThreeAmount,instOneStatus,instTwoStatus,instThreeStatus} = req.body
+        const {userId,instOneStatus,instTwoStatus,instThreeStatus} = req.body
         const user = await Fees.findOne({userId : userId})
 
         if(user) return res.status(400).json({msg: 'User not found'})
 
-        const fee = await Fees.create({userId,instOneAmount,instTwoAmount,instThreeAmount,instOneStatus,instTwoStatus,instThreeStatus})
+        const fee = await Fees.create({userId,instOneStatus,instTwoStatus,instThreeStatus})
         
         res.status(201).json({fee})
         
@@ -19,12 +20,12 @@ const createFees = async (req,res) => {
 
 const updateFees = async (req,res) => {
     try {
-        const {userId, instOneAmount,instTwoAmount,instThreeAmount,instOneStatus,instTwoStatus,instThreeStatus} = req.body
+        const {userId,instOneStatus,instTwoStatus,instThreeStatus} = req.body
         const user = await Fees.findOne({userId})
 
         if(!user) return res.status(201).json({msg: 'User not found'})
 
-        const fee = await Fees.findByIdAndUpdate(user._id,{userId, instOneAmount,instTwoAmount,instThreeAmount,instOneStatus,instTwoStatus,instThreeStatus})
+        const fee = await Fees.findByIdAndUpdate(user._id,{userId,instOneStatus,instTwoStatus,instThreeStatus})
         
         res.status(201).json({msg: 'Success'})
         
@@ -36,11 +37,16 @@ const updateFees = async (req,res) => {
 const getFees = async (req,res) => {
     try {
         const userId = req.params.id
-        const user = await Fees.findOne({userId})
+        const std = req.params.std
 
-        if(!user) return res.status(201).json({msg: 'User not found',isCreate:true})
+        const user = await Fees.findOne({userId:userId})
+        const inst = await Inst.findOne({std:std})
 
-        res.status(201).json(user)
+        if(!inst) return res.status(201).json({msg:'Create Installments'})
+
+        if(!user) return res.status(201).json({msg: 'User not found',isCreate:true,inst})
+
+        res.status(201).json({user,std})
         
     } catch (err) {
         res.status(500).json({msg:err.message})      

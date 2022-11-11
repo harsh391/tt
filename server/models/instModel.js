@@ -1,23 +1,23 @@
 const mongoose = require('mongoose')
 
-const feesSchema = new mongoose.Schema({
+const instSchema = new mongoose.Schema({
     
-    userId:{
+    std:{
         required: true,
         type: String,
     },
-    instOneStatus: {
+    instOne: {
         required: true,
         type: String,
     },
-    instTwoStatus: {
+    instTwo: {
         required: true,
         type: String,
     },
-    instThreeStatus: {
+    instThree: {
         required: true,
         type: String,
     },
 })
 
-module.exports = mongoose.model("Fees",feesSchema)
+module.exports = mongoose.model("Insts",instSchema)

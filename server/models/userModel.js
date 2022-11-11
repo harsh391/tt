@@ -14,19 +14,19 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        medium:{
-            type: String,
-            required: true,
-        },
-        board:{
-            type: String,
-            required: true,
-        },
-        sub:{
-            type: Array,
-            default:[],
-            required: true,
-        },
+        // medium:{
+        //     type: String,
+        //     required: true,
+        // },
+        // board:{
+        //     type: String,
+        //     required: true,
+        // },
+        // sub:{
+        //     type: Array,
+        //     default:[],
+        //     required: true,
+        // },
         school:{
             type: String,
             required: true,
