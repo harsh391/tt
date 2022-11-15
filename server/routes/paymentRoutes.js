@@ -11,7 +11,7 @@ router.route('/payment/orders').post(createOrders)
 router.route('/payment/verify').post(verifyOrder)
 router.route('/payment/:std/:id').get(getPayment)
 router.route('/payment/:id').put(updatePayment)
-// router.route('/payment').get(getPayments)
+router.route('/payments').get(getPayments)
 // router.route('/payment').post(createFees)
 
 module.exports = router;

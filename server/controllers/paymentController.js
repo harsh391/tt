@@ -1,4 +1,5 @@
 const Insts = require('../models/instModel')
+const Users = require('../models/userModel')
 const Razorpay = require('razorpay')
 const crypto = require('crypto')
 const Payments = require('../models/paymentModel')
@@ -88,12 +89,15 @@ const getPayment = async(req,res) => {
         const userId = req.params.id
         const std = req.params.std
 
+        const tempUser = await Users.findById(userId)
+        const username = tempUser.firstName + tempUser.lastname
+
         const payment = await Payments.findOne({userId:userId})
         const inst = await Insts.findOne({std:std})
 
         if(!payment) {
             try {
-                const newPayment = await Payments.create({userId:userId})
+                const newPayment = await Payments.create({userId:userId,username:username})
                 return res.status(201).json({payment:newPayment,inst})
             } catch (err) {
                 res.status(500).json({msg:err.message})

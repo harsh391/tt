@@ -6,6 +6,10 @@ const paymentSchema = new mongoose.Schema({
         required: true,
         type: String,
     },
+    username:{
+        required:true,
+        type:String,
+    },
     instOneStatus: {
         default: 'Unpaid',
         type: String,
