@@ -32,6 +32,7 @@ const FeesUser = () => {
     const getFees = async () => {
         try {
             const res = await axios.get(`/api/fees/${std}/${id}`)
+            console.log(res.data);
             if(res.data.isCreate === true) {
                 alert('No records found')
             }

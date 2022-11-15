@@ -7,16 +7,20 @@ import { BiEditAlt } from 'react-icons/bi'
 import { RiDeleteBin7Fill } from 'react-icons/ri'
 import axios from 'axios'
 import { GlobalState } from '../GlobalState'
-const TestAdmin = () => {
+const TestTeacher = () => {
     const [tests, setTests] = useState([]);
     const [testDetails, setTestDetails] = useState({
-        date: '', std: '', sub: '',chap: '',totalMarks: ''
+        date: '', std: '', sub: '',
+        chap: '',totalMarks: ''
+
     })
     const [add, setAdd] = useState(false);
     const state = useContext(GlobalState)
     const [option,setOption] = state.option
     const [isEditing, setIsEditing] = useState(false);
     const [id, setId] = useState("")
+    let index=0;
+
     useEffect(() => {
 
         const getTests = async () => {
@@ -42,16 +46,17 @@ const TestAdmin = () => {
     const handleEdit = (item) => {
         setIsEditing(true);
         setId(item._id)
-        const { date, std, sub, board, medium, totalMarks, chap } = item;
+        const { date, std, sub,totalMarks, chap } = item;
+
+
 
         setTestDetails({
             date: date, std: std, sub: sub,
-            chap: chap, board: board, medium: medium,
-            totalMarks: totalMarks
+            chap: chap,totalMarks: totalMarks
         })
     }
-
     const handleCreate = async (e) => {
+
         if (isEditing) {
             setIsEditing(false)
             try {
@@ -70,10 +75,12 @@ const TestAdmin = () => {
             }
         }
         setTestDetails({
-            date: '', std: '', sub: '',chap: '',totalMarks: ''
+            date: '', std: '', sub: '',
+            chap: '', board: '', medium: '',
+            totalMarks: ''
         })
-    }
 
+    }
     const handleChange = (e) => {
         const { name, value } = e.target;
         setTestDetails({ ...testDetails, [name]: value })
@@ -115,21 +122,31 @@ const TestAdmin = () => {
                         {isEditing ? 'EDIT' : 'Create'}
                     </button>
                 </div>
+
+
+
+
+
             </div>
 
             <table className="test-table">
+
                 <tr>
+                    <th>Sr. No.</th>
                     <th>Date</th>
                     <th>Standard</th>
                     <th>Subject</th>
                     <th>Total Marks</th>
                     <th>Chapters</th>
                     <th>Actions</th>
+
                 </tr>
                 {tests.map((item) => {
                     return <tr key={item._id} className={(id===item._id && isEditing) ? 'edit-tr' : ''}>
+                      <td>{++index}</td>
+
                         <td >
-                            <Link to={`/admin/tests/${item._id}`}>{item.date}</Link>
+                            <Link to={`/teacher/tests/${item._id}`}>{item.date}</Link>
                         </td>
                         <td>{item.std}</td>
                         <td>{item.sub}</td>
@@ -137,14 +154,18 @@ const TestAdmin = () => {
                         <td>{item.chap}</td>
                         <td >
                             <button className='edit-btn-dif' onClick={() => handleDelete(item._id)}> <RiDeleteBin7Fill className='add-btn' /></button>
+
                             <button className='edit-btn-dif' onClick={() => handleEdit(item)}> <BiEditAlt className='add-btn' />
                             </button>
                         </td>
                     </tr>
+
                 })}
+
             </table>
+
         </div>
     )
 }
 
-export default TestAdmin
+export default TestTeacher

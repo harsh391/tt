@@ -17,6 +17,8 @@ const Sidebar = () => {
   const closeSidebar = state.closeSidebar
   const [token] = state.token
   const [isAdmin,setIsAdmin] = state.isAdmin
+  const [teacherId,setTeacherId] = state.teacherId
+  const [isLogged,setIsLogged] = state.isLogged
 
     useEffect(() => {
     if(token)
@@ -36,6 +38,30 @@ const Sidebar = () => {
     }   
   },[token])
 
+  useEffect(() => {
+    if(teacherId)
+    {
+        const getUser = async() => {
+            try{
+                const res = await axios.get(`/teacher/${teacherId}`,
+                {headers:{Authorization:token}}
+                )
+                setUser(res.data)
+                
+            } catch (err) {
+                alert(err.response.data.msg)
+            }
+        }
+        getUser()
+    }   
+  },[teacherId])
+
+//   useEffect(() => {
+//     if(teacherId) {
+//         setTeacherToken(teacherId)
+//     }
+//   },[teacherId])
+
   user.firstname === 'admin' ? setIsAdmin(true) : setIsAdmin(false)
 //   option==='' ? isAdmin && setOption('Test Admin') : setOption('Test')
 
@@ -52,6 +78,9 @@ const Sidebar = () => {
     const handleLogout = async (e) => {
         e.preventDefault()
         setIsAdmin(false)
+        setTeacherId(false)
+        setIsLogged(false)
+
         await axios.get('/user/logout')
         localStorage.clear()
         window.location.href = '/'
@@ -67,7 +96,7 @@ const Sidebar = () => {
                     <h3 className='profile_h3'>{`${user.firstname} ${user.lastname}`}</h3>
                 </div>
                 <div className='profile_info'>
-                    <span className='profile_std'>Std : {user.std}</span>
+                    <span className='profile_std'>Std : {user.std || 'null'}</span>
                 </div>
             </div>
             <ul className='option_container'>
@@ -92,8 +121,29 @@ const Sidebar = () => {
                 </>
                 }
                 {/* Admin controls */}
+
+                {/* teacher controls */}
+                {teacherId!=="" && <>
+                    <li className={option==='Test' || option==='test' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
+                        <Link to='/teacher/tests'>Test</Link>
+                    </li>
+                    <li className={option==='syllabus' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
+                        <Link to='/teacher/syllabus'>Syllabus</Link>
+                    </li>
+                    <li className={option==='Attendance' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
+                        <Link to='/teacher/attendance'>Attendance</Link>
+                    </li>
+                    {/* <li className={option==='Fees' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
+                        <Link to='/user/fees'>Fees</Link>
+                    </li> */}
+                    
+                </>
+
+                }
+                {/* teacher controls */}
+
                 {/* User Controls */}
-                {!isAdmin && <>
+                {(!isAdmin && teacherId==='') && <>
                     <li className={option==='Test' || option==='' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         <Link to='/user/tests'>Test</Link>
                     </li>
@@ -105,6 +155,9 @@ const Sidebar = () => {
                     </li> */}
                     <li className={option==='Fees' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         <Link to='/user/fees'>Fees</Link>
+                    </li>
+                    <li className={option==='Payment' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
+                        <Link to='/user/payment'>Payment</Link>
                     </li>
                     
                 </>

@@ -14,6 +14,11 @@ import PageAdminFees from './Pages/PageAdminFees'
 
 import { DataProvider } from './GlobalState';
 import PageAdminFeesEdit from './Pages/PageAdminFeesEdit';
+import PageTeacherSyllabus from './Pages/PageTeacherSyllabus';
+import PageTeacherTest from './Pages/PageTeacherTest';
+import PageTeacherMarks from './Pages/PageTeacherMarks';
+import PageTeacherAttendance from './Pages/PageTeacherAttendance';
+import PageUserPayment from './Pages/PageUserPayment'
 
 
 function App() {
@@ -32,9 +37,14 @@ function App() {
           <Route path='/user/fees' element={<PageUserFees></PageUserFees>}></Route>
           <Route path='/admin/fees' element={<PageAdminFees></PageAdminFees>}></Route>
           <Route path='/user/syllabus' element={<PageUserSyllabus></PageUserSyllabus>}></Route>
+          <Route path='/user/payment' element={<PageUserPayment></PageUserPayment>}></Route>
           <Route path='/admin/syllabus' element={<PageAdminSyllabus></PageAdminSyllabus>}></Route>
           <Route path='/admin/fees/:std/:id' element={<PageAdminFeesEdit></PageAdminFeesEdit>}></Route>
           <Route path='/admin/tests/:id' element={<PageAdminMarks></PageAdminMarks>}></Route>
+          <Route path='/teacher/syllabus' element={<PageTeacherSyllabus></PageTeacherSyllabus>}></Route>
+          <Route path='/teacher/tests' element={<PageTeacherTest></PageTeacherTest>}></Route>
+          <Route path='/teacher/tests/:id' element={<PageTeacherMarks></PageTeacherMarks>}></Route>
+          <Route path='/teacher/attendance' element={<PageTeacherAttendance></PageTeacherAttendance>}></Route>
           </Routes>
         </Router>
       </div>

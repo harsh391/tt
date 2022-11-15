@@ -6,9 +6,11 @@ export const GlobalState = createContext()
 export const DataProvider = ({children}) => {
     const [token,setToken] = useState('')
     const [isLogged,setIsLogged] = useState(false)
+    const [teacherId,setTeacherId] = useState('')
     
     useEffect(() => {
         const firstLogin = localStorage.getItem('firstLogin')
+        
 
         if(firstLogin)
         {
@@ -17,7 +19,16 @@ export const DataProvider = ({children}) => {
                 setToken(res.data.accesstoken)
                 setTimeout(()=>{refreshtoken()},10 * 60 * 1000)
             }
-            refreshtoken()            
+            refreshtoken()          
+              
+        }
+        
+    },[])
+
+    useEffect(() => {
+        const tempTeacher = localStorage.getItem('teacherId')
+        if(tempTeacher) {
+            setTeacherId(tempTeacher)
         }
     },[])
 
@@ -64,6 +75,7 @@ export const DataProvider = ({children}) => {
         token: [token],
         isLogged: [isLogged, setIsLogged],
         isAdmin: [isAdmin,setIsAdmin],
+        teacherId: [teacherId,setTeacherId]
     }
 
     return (

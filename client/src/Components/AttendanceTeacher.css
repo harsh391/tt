@@ -1,0 +1,13 @@
+.date-selection{
+    display: flex;
+    /* text-align: center; */
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+.date-selection label {
+    margin-right: 1rem;
+}
+.date-selection input {
+    margin-right: 1rem;
+}

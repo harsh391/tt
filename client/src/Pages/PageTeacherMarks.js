@@ -1,34 +1,33 @@
 import React, { useContext } from 'react'
+import MarksTeacher from '../Components/MarksTeacher';
 import Navbar from '../Components/Navbar';
 import Sidebar from '../Components/Sidebar'
-import UserContainer from '../Components/UserContainer'
 import { GlobalState } from '../GlobalState';
 import './UserScreen.css'
 
-
-const UserScreen = () => {
+const PageTeacherMarks = () => {
   const state = useContext(GlobalState)
   const [isLogged] = state.isLogged
   
 
   return (
     <div className='userScreen'>
-      {/* {isLogged ? <>
+      {/* {isLogged ? <> */}
         <Navbar />
         <div className='userScreenGrid'>
           <Sidebar />
-          <UserContainer />  
+          <div className='userContainer' style={{flex:'1'}}>
+            <div className="user-container-option">
+              <h4>Register</h4>
+            </div>
+            <MarksTeacher />  
+          </div>
         </div>   
-        </> :
+        {/* </> :
         <h1>Please Log in</h1> 
       } */}
-      <Navbar />
-        <div className='userScreenGrid'>
-          <Sidebar />
-          <UserContainer />  
-        </div>  
     </div>
   )
 }
 
-export default UserScreen
+export default PageTeacherMarks

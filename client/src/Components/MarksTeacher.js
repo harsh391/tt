@@ -6,7 +6,7 @@ import {BsPlusCircle} from 'react-icons/bs'
 import {BiEditAlt} from 'react-icons/bi'
 import { GlobalState } from '../GlobalState'
 
-const Marks = () => {
+const MarksTeacher = () => {
     const {id} = useParams()
     const [marksId,setMarksId] = useState('')
     const [add,setAdd] = useState(false)
@@ -130,4 +130,4 @@ const Marks = () => {
   )
 }
 
-export default Marks
+export default MarksTeacher
