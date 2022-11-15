@@ -5,6 +5,7 @@ import FeesAdmin from '../Components/FeesAdmin'
 import { GlobalState } from '../GlobalState'
 import FeesAdminInst from '../Components/FeesAdminInst'
 import './PageAdminFees.css'
+import PaymentAdmin from '../Components/PaymentAdmin'
 
 
 const PageAdminFees = () => {
@@ -23,7 +24,8 @@ const PageAdminFees = () => {
               <button className={option==='installments' ? 'option-button-selected' : 'option-button'} onClick={() => setOption('installments')}>Installment</button>
               <button className={option==='students' ? 'option-button-selected' : 'option-button'} onClick={() => setOption('students')}>Students</button>
             </div>
-            {option === 'installments' ? <FeesAdminInst /> : <FeesAdmin /> }
+            {/* <PaymentAdmin /> */}
+            {option === 'installments' ? <FeesAdminInst /> : <PaymentAdmin /> }
              
           </div>
         </div>   

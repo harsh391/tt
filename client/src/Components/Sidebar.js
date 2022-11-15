@@ -104,9 +104,9 @@ const Sidebar = () => {
                 {isAdmin && 
                 <>
                     
-                    <li className={option==='' || option==='Test Admin' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
+                    {/* <li className={option==='' || option==='Test Admin' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         <Link to='/admin/tests'>Test Admin</Link>
-                    </li>
+                    </li> */}
                     
                     <li className={option==='Register' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         <Link to='/admin/register'>Register</Link>
@@ -114,9 +114,9 @@ const Sidebar = () => {
                     <li className={option==='Fees' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         <Link to='/admin/fees'>Fees</Link>
                     </li>
-                    <li className={option==='Syllabus' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
+                    {/* <li className={option==='Syllabus' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         <Link to='/admin/syllabus'>Syllabus</Link>
-                    </li>
+                    </li> */}
 
                 </>
                 }
@@ -153,9 +153,9 @@ const Sidebar = () => {
                     {/* <li className={option==='Schedule' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         Schedule
                     </li> */}
-                    <li className={option==='Fees' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
+                    {/* <li className={option==='Fees' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         <Link to='/user/fees'>Fees</Link>
-                    </li>
+                    </li> */}
                     <li className={option==='Payment' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         <Link to='/user/payment'>Payment</Link>
                     </li>
