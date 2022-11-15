@@ -10,6 +10,8 @@ const markRoutes = require('./routes/marksRoutes')
 const feesRoutes = require('./routes/feesRoutes')
 const syllabusRoutes = require('./routes/syllabusRoutes')
 const instRoutes = require('./routes/instRoutes')
+const teacherRoutes = require('./routes/teacherRoutes')
+const paymentRoutes = require('./routes/paymentRoutes')
 
 const app = express()
 app.use(express.json())
@@ -25,6 +27,8 @@ app.use('/api',markRoutes)
 app.use('/api',feesRoutes)
 app.use('/api',syllabusRoutes)
 app.use('/api',instRoutes)
+app.use('/teacher',teacherRoutes)
+app.use('/api',paymentRoutes)
 
 // Connect to mongodb
 const PORT = process.env.PORT || 5000

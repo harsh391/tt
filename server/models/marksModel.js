@@ -5,11 +5,27 @@ const marksSchema = new mongoose.Schema({
         required: true,
         type: String,
     },
+    date:{
+        type: String,
+        required: true,
+    },
+    sub:{
+        type: String,
+        required: true,
+    },
+    chap:{
+        type: String,
+        required: true,
+    },
+    totalMarks: {
+        type: String,
+        reqduired: true,
+    },
     userId:{
         required: true,
         type: String,
     },
-    marks: {
+    obtMarks: {
         required: true,
         type: Number,
         default: 0

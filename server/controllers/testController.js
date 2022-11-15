@@ -4,24 +4,24 @@ const Marks = require('../models/marksModel')
 
 const createTest = async(req,res) => {
     try {
-        const {sub,std,date,board,medium,chap,totalMarks} = req.body
+        const {sub,std,date,chap,totalMarks} = req.body
         //validation
 
         //Adding info to test db
-        const test = await Tests.create({date, std,sub, medium,board,chap,totalMarks})
+        const test = await Tests.create({date,std,sub,chap,totalMarks})
 
         // Add info to marks table
-        let users = []
-        const tempUsers = await Users.find({std:test.std,medium:test.medium,board:test.board})
+        let users = await Users.find({std:test.std})
+        
         //subject validation
-        tempUsers.map((user) => {
-            user.sub.map((subb) => {
-                if(subb === test.sub) {
-                    users = [...users,user]
-                    // console.log('hello');
-                }
-            })
-        })
+        // tempUsers.map((user) => {
+        //     user.sub.map((subb) => {
+        //         if(subb === test.sub) {
+        //             users = [...users,user]
+        //             console.log('hello');
+        //         }
+        //     })
+        // })
 
         const userFunc = (users) => {
             const promises = users.map(async (user) => {
@@ -29,7 +29,11 @@ const createTest = async(req,res) => {
                     testId:test._id,
                     userId:user._id,  
                     userName:user.firstname + ' ' + user.lastname,
-                    marks:0              
+                    obtMarks:-10,
+                    sub:sub,
+                    date:date,
+                    chap:chap,
+                    totalMarks:totalMarks         
                 })
             });
             return Promise.all(promises)
@@ -90,9 +94,9 @@ const deleteTest = async(req,res) => {
 
 const editTest = async(req,res) => {
     try {
-        const {sub,std,date,board,medium,chap,totalMarks} = req.body
+        const {sub,std,date,chap,totalMarks} = req.body
         
-        await Tests.findOneAndUpdate({_id:req.params.id},{sub,std,date,board,medium,chap,totalMarks})
+        await Tests.findOneAndUpdate({_id:req.params.id},{sub,std,date,chap,totalMarks})
         
         res.status(201).json({msg:'Success.'})
         

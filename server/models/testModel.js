@@ -13,14 +13,6 @@ const testSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    medium:{
-        type: String,
-        required: true,
-    },
-    board:{
-        type: String,
-        required: true,
-    },
     chap:{
         type: String,
         required: true,

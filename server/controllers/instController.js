@@ -47,5 +47,17 @@ const getInst = async (req,res) => {
     }
 }
 
-module.exports = {createInst,getInst,updateInst}
+const getInstStd = async (req,res) => {
+    try {
+        const std = req.params.std
+        const inst = await Insts.findOne({std:std})
+
+        res.status(201).json(inst)
+        
+    } catch (err) {
+        res.status(500).json({msg:err.message})      
+    }
+}
+
+module.exports = {createInst,getInst,updateInst,getInstStd}
 

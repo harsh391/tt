@@ -139,6 +139,17 @@ const logout = async (req,res) => {
     }
 }
 
+const getUsersStd = async (req,res) => {
+    const std=req.params.std
+    try {
+        const users = await Users.find({std:std}).select('-password')
+        if(!users) return res.status(400).json({msg: 'Users does not exist.'})
+        res.status(201).json(users)
+    } catch (err) {
+        return res.status(500).json({msg: err.message})
+    }
+}
+
 
 
 const createAccessToken = (id) => {
@@ -149,4 +160,4 @@ const createRefreshToken = (id) => {
     return jwt.sign(id, process.env.REFRESH_TOKEN_SECRET,{expiresIn: '1d'})
 }
 
-module.exports = {register, login, getUserInfo, refreshToken,logout, getUsers}
+module.exports = {register, login, getUserInfo, getUsersStd, refreshToken,logout, getUsers}
