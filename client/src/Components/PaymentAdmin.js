@@ -54,7 +54,7 @@ const PaymentAdmin = () => {
             <td>{index++}</td>
             <td>{student.username}</td>
             <td>{student.instOneStatus}</td>
-            <td>{student.instTwotatus}</td>
+            <td>{student.instTwoStatus}</td>
             <td>{student.instThreeStatus}</td>
           </tr>
       })}

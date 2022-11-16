@@ -19,6 +19,7 @@ import PageTeacherTest from './Pages/PageTeacherTest';
 import PageTeacherMarks from './Pages/PageTeacherMarks';
 import PageTeacherAttendance from './Pages/PageTeacherAttendance';
 import PageUserPayment from './Pages/PageUserPayment'
+import PageTeacherRegister from './Pages/PageTeacherRegister';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           <Route path='/teacher/tests' element={<PageTeacherTest></PageTeacherTest>}></Route>
           <Route path='/teacher/tests/:id' element={<PageTeacherMarks></PageTeacherMarks>}></Route>
           <Route path='/teacher/attendance' element={<PageTeacherAttendance></PageTeacherAttendance>}></Route>
+          <Route path='/admin/teacherRegister' element={<PageTeacherRegister></PageTeacherRegister>}></Route>
           </Routes>
         </Router>
       </div>

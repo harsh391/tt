@@ -103,21 +103,18 @@ const Sidebar = () => {
                 {/* Admin controlles */}
                 {isAdmin && 
                 <>
-                    
-                    {/* <li className={option==='' || option==='Test Admin' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
-                        <Link to='/admin/tests'>Test Admin</Link>
-                    </li> */}
-                    
-                    <li className={option==='Register' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
+                    <li className={option==='Register' || option==='' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         <Link to='/admin/register'>Register</Link>
+                    </li>
+                    <li className={option==='Teacher Register' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
+                        <Link to='/admin/teacherRegister'>Teacher Register</Link>
                     </li>
                     <li className={option==='Fees' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         <Link to='/admin/fees'>Fees</Link>
                     </li>
                     {/* <li className={option==='Syllabus' ? 'sidebar_option_selected' : 'sidebar_option'} onClick={handleSelect}>
                         <Link to='/admin/syllabus'>Syllabus</Link>
-                    </li> */}
-
+                    </li> */}]
                 </>
                 }
                 {/* Admin controls */}

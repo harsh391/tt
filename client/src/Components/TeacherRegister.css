@@ -1,0 +1,40 @@
+.teacher-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.teacher-info .teacher_btn {
+    cursor: pointer;
+    display: block;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    text-decoration: none;
+    background: #129856;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.teacher_btn:hover {
+    background: #76f4b5;
+    color: #129856;
+}
+
+.syllabus-label {
+    margin-right: 1rem;
+}
+
+.syllabus-select {
+    font-size: 1.2rem;
+}
+
+.info {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0.5rem;
+}
+
+.info p {
+    font-size: 1.1rem;
+}
