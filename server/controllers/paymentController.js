@@ -90,7 +90,7 @@ const getPayment = async(req,res) => {
         const std = req.params.std
 
         const tempUser = await Users.findById(userId)
-        const username = tempUser.firstName + tempUser.lastname
+        const username = tempUser.firstname + tempUser.lastname
 
         const payment = await Payments.findOne({userId:userId})
         const inst = await Insts.findOne({std:std})

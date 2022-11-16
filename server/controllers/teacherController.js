@@ -1,17 +1,49 @@
 const Teachers = require('../models/TeacherModel')
 // const Users = require('../models/userModel')
+const nodemailer = require('nodemailer')
 
 const createTeacher= async (req,res) => {
     try {
-        const {firstname,lastname,role,classes,email,password} = req.body
+        const {firstname,lastname,email} = req.body.teacher
+        const classes = req.body.classes
 
         const temp = await Teachers.findOne({email:email})
 
         if(temp) return res.status(400).json({msg:'Teacher already exists.'})
 
-        const teacher = await Teachers.create({firstname,lastname,role,classes,email,password})
+        // password
+
+        const password = Math.random().toString(36).slice(2)
+
+        // Nodemailer
+
+        let mailTransporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'thakartutorials@gmail.com',
+                pass: 'tagsunhtsydyhlhl'
+            }
+        });
+
+
+        let mailDetails = {
+            from: 'thakartutorials@gmail.com',
+            to: `${email}`,
+            subject: 'Thakar Tutorials Portal Credentials',
+            text: `Your email is ${email} and password is ${password}, use these credentials to log in.`
+        };
         
-        res.status(201).json(teacher)
+        mailTransporter.sendMail(mailDetails, function(err, data) {
+            if(err) {
+                console.log('Error Occurs');
+            } else {
+                console.log('Email sent successfully');
+            }
+        });
+
+        const teacher = await Teachers.create({firstname,lastname,role:'Teacher',classes,email,password:password})
+        
+        res.status(201).json({creation:true})
         
     } catch (err) {
         res.status(500).json({msg:err.message})      
